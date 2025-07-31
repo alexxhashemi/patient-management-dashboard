@@ -1,0 +1,46 @@
+.patient-table-container {
+  padding: 20px;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.patient-table thead {
+  background-color: #f5f5f5;
+}
+
+.patient-table th,
+.patient-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.patient-table th {
+  font-weight: bold;
+}
+
+.patient-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.patient-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.patient-table button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.patient-table button:hover {
+  background-color: #cc0000;
+}
