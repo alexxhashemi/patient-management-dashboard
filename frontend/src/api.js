@@ -33,7 +33,6 @@ export async function deletePatient(id) {
 }
 
 
-// Default export to allow import API from './api'
 const API = {
   addPatient,
   fetchPatients,

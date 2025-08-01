@@ -1,4 +1,3 @@
-// server.js
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
@@ -9,16 +8,15 @@ const port = 3001;
 app.use(cors());
 app.use(express.json());
 
-// PostgreSQL connection setup - update user/password/db as needed
 const pool = new Pool({
-  user: "alihashemi",       // your DB username
+  user: "alihashemi",
   host: "localhost",
-  database: "patient_db",   // your DB name
-  password: "12345",        // your DB password
-  port: 5431,               // default Postgres port
+  database: "patient_db",
+  password: "12345",
+  port: 5431,
 });
 
-// GET /patients - fetch all patients
+
 app.get("/patients", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM patients ORDER BY id DESC");
@@ -29,7 +27,7 @@ app.get("/patients", async (req, res) => {
   }
 });
 
-// POST /patients - add a new patient
+
 app.post("/patients", async (req, res) => {
   const { first_name, middle_name, last_name, date_of_birth, status, address } = req.body;
 
@@ -46,7 +44,7 @@ app.post("/patients", async (req, res) => {
   }
 });
 
-// DELETE /patients/:id - delete a patient by id
+
 app.delete('/patients/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -60,7 +58,6 @@ app.delete('/patients/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 
 app.listen(port, () => {
