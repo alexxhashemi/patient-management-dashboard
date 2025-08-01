@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="container">
       <h1>Patient Management Dashboard</h1>
-      <PatientForm onAdd={loadPatients} />
+      <PatientForm onCreate={loadPatients} />
       <PatientTable data={patients} onUpdate={loadPatients} />
     </div>
   );

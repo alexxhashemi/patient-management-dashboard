@@ -46,6 +46,23 @@ app.post("/patients", async (req, res) => {
   }
 });
 
+// DELETE /patients/:id - delete a patient by id
+app.delete('/patients/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('DELETE FROM patients WHERE id = $1 RETURNING *', [id]);
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Patient not found' });
+    }
+    res.json({ message: 'Patient deleted successfully', patient: result.rows[0] });
+  } catch (err) {
+    console.error('Error deleting patient:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

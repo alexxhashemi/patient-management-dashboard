@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './PatientForm.css';
+import API from '../api';
 
 export default function PatientForm({ onCreate }) {
   const [formData, setFormData] = useState({
     first_name: '',
     middle_name: '',
     last_name: '',
-    dob: '',
+    date_of_birth: '',
     status: '',
     address: '',
   });
@@ -21,28 +22,22 @@ export default function PatientForm({ onCreate }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/patients', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+      await API.addPatient(formData);
+      onCreate();
+      setFormData({
+        first_name: '',
+        middle_name: '',
+        last_name: '',
+        date_of_birth: '',
+        status: '',
+        address: '',
       });
-      if (res.ok) {
-        onCreate();
-        setFormData({
-          first_name: '',
-          middle_name: '',
-          last_name: '',
-          dob: '',
-          status: '',
-          address: '',
-        });
-      } else {
-        alert('Failed to create patient');
-      }
     } catch (err) {
       console.error('Error creating patient:', err);
+      alert('Failed to create patient');
     }
   };
+  
 
   return (
     <form className="patient-form" onSubmit={handleSubmit}>
@@ -61,7 +56,7 @@ export default function PatientForm({ onCreate }) {
       </div>
       <div className="form-row">
         <label>Date of Birth</label>
-        <input type="date" name="dob" value={formData.dob} onChange={handleChange} required />
+        <input type="date" name="date_of_birth" value={formData.date_of_birth} onChange={handleChange} required />
       </div>
       <div className="form-row">
         <label>Status</label>

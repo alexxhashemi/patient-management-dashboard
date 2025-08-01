@@ -1,4 +1,3 @@
-// src/api.js
 import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3001";
@@ -26,12 +25,13 @@ export async function addPatient(patientData) {
 export async function deletePatient(id) {
   try {
     const response = await axios.delete(`${API_BASE_URL}/patients/${id}`);
-    return response.data;
+    return response.status;  // usually 204
   } catch (error) {
     console.error("Error deleting patient:", error);
     throw error;
   }
 }
+
 
 // Default export to allow import API from './api'
 const API = {
